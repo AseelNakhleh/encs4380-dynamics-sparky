@@ -1,0 +1,83 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module 2 - Frequency Response</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <h1>First-Order Frequency Response</h1>
+
+    <section>
+        <h2>1. Input Parameters</h2>
+
+        <label>Time Constant (τ): 
+            <span id="tauValue">0.20</span> s
+        </label>
+        <input type="range" id="tau"
+               min="0.05" max="1" step="0.05" value="0.2">
+
+        <p>Input Frequency (ω):
+            <span id="omegaValue">2.0</span> rad/s
+        </p>
+        <input type="range" id="omega"
+               min="0.5" max="20" step="0.5" value="2">
+    </section>
+
+    <section>
+        <h2>2. Calculated Results</h2>
+        <p>Amplitude Ratio (M): <b id="M"></b></p>
+        <p>Phase Lag (φ): <b id="phase"></b></p>
+        <p>Cutoff Frequency: <b id="cutoff"></b></p>
+        <p>Dynamic Error (δ): <b id="error"></b></p>
+    </section>
+
+    <section>
+        <h2>3. Input and Output Sine Waves</h2>
+        <div id="sinePlot"></div>
+    </section>
+
+    <section>
+        <h2>4. Bode Plots</h2>
+        <div id="bodeMagnitude"></div>
+        <div id="bodePhase"></div>
+    </section>
+
+    <section>
+        <h2>5. Dynamic-Error Calculator</h2>
+        <label>Input frequency (Hz):
+            <input type="number" id="errorFrequency"
+                   value="1" min="0" step="0.1">
+        </label>
+        <p>Dynamic Error: <b id="calculatedError"></b></p>
+    </section>
+
+    <section>
+        <h2>6. Predict, Then Check</h2>
+        <p>What happens to the output amplitude
+           when input frequency increases?</p>
+        <select id="prediction">
+            <option value="">Choose your prediction</option>
+            <option value="increase">Increases</option>
+            <option value="decrease">Decreases</option>
+            <option value="same">Stays the same</option>
+        </select>
+
+<button id="savePrediction">Save Prediction</button>
+<button id="checkPrediction" disabled>Check Prediction</button>
+
+        <p id="predictionResult"></p>
+    </section>
+
+    <section id="validation">
+        <h2>7. Validation Tests</h2>
+    </section>
+
+    <script src="https://cdn.plot.ly/plotly-3.1.0.min.js"></script>
+    <script src="script.js"></script>
+
+</body>
+</html>

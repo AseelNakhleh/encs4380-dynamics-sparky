@@ -1,0 +1,23 @@
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f7fb;
+    margin: 30px;
+    color: #202938;
+}
+
+h1 {
+    text-align: center;
+    color: #243b72;
+}
+
+section {
+    background: white;
+    padding: 20px;
+    margin: 20px 0;
+    border-radius: 12px;
+}
+
+input[type="range"] {
+    width: 100%;
+}
