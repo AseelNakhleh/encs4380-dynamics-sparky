@@ -48,6 +48,6 @@ No separate server or installation is required for local use.
 GitHub Pages and Group Submission
 This module should be integrated into the group's public repository and GitHub Pages website. The group's main README must also include the live Pages link, all group members, module responsibilities, and screenshots. The final group submission requires a v1.0 GitHub release and the GitHub Pages link.
 
-Group GitHub Pages link: https://github.com/hala-tarifi/ENCS4380-Sparky
+Group GitHub Pages link: https://github.com/AseelNakhleh/encs4380-dynamics-sparky
 AI Assistance Disclosure
 ChatGPT was used to assist with JavaScript coding, debugging, and improving the interactive graphs. It also helped verify the calculations and resolve technical issues during development.
