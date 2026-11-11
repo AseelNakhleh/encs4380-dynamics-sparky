@@ -42,6 +42,10 @@ Modules 1–3 display the expected values, calculated results, and pass/fail sta
 | 6 · State space with m = 1, b = 2, k = 4 | 3 | State-matrix eigenvalues and transfer-function poles both equal −1 ± j1.732 |
 
 ## Screenshots
+**Module 1. First-Order Time Response**
+**Module 2. First-Order Frequency Response**
+**Module 3. Second-order response**
+
 
 **Module 4 · First-order step results**
 
