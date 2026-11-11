@@ -16,18 +16,22 @@ An interactive challenge where users guess sensor parameters from noisy response
 
 Open `index.html` in a browser, or visit the team's GitHub Pages site and select Module 4.
 
+
 ## Screenshots
 
-**Second-order response**  
-!\[Second-order response](screenshots/second-order-results.png)
+### Second-order response
+![Second-order response](screenshots/second-order-results.png)
 
-**First-order step response**  
-!\[First-order step](screenshots/first-order-step-results.png)
+### First-order step response
+![First-order step](screenshots/first-order-step-results.png)
 
-**First-order sine challenge and reveal**  
-!\[Sine challenge](screenshots/first-order-sine-challenge.png)
-!\[Sine results](screenshots/first-order-sine-results.png)
+### First-order sine challenge
+![Sine challenge](screenshots/first-order-sine-challenge.png)
 
-**Developer:**Mohammad Abuadiyah 1220270 
-**AI assistance:** AI tools were used to help implement and test the module.
+### First-order sine results
+![Sine results](screenshots/first-order-sine-results.png)
+
+**Developer:** Mohammad Abuadiyah - 1220270
+
+**AI Assistance:** AI tools were used to help implement and test the module.
 
