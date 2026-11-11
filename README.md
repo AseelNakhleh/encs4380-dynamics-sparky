@@ -54,8 +54,11 @@ Modules 1–3 display the expected values, calculated results, and pass/fail sta
 ## AI Assistance
 
 Module 1: ChatGPT was used to explain concepts and assist with coding and debugging.
+
 Module 2: ChatGPT helped with understanding concepts, coding, and testing.
+
 Module 3: AI was used to help understand the concepts, check and test the module's behavior, and draft the README.
+
 Module 4: AI tools assisted with understanding the concepts, implementing features, and testing the challenge.
 
 README: AI assisted with organizing and drafting the repository documentation.
