@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Module 3 | Second-order response</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main>
+  <header>
+    <h1>Module 3 · Second-order response</h1>
+    <p>See how a mass on a spring moves when a constant 1 N force is suddenly applied.</p>
+  </header>
+
+  <section class="panel">
+    <h2>Predict, then check</h2>
+    <label for="guess">At critical damping, will displacement go above its final value?</label>
+    <div class="actions">
+      <select id="guess">
+        <option value="">Choose your prediction</option>
+        <option value="yes">Yes, it will overshoot</option>
+        <option value="no">No, it will approach smoothly</option>
+      </select>
+      <button id="check" type="button">Check on the plot</button>
+    </div>
+    <p id="feedback" role="status"></p>
+  </section>
+
+  <section class="panel">
+    <h2>Mass, damper and spring</h2>
+    <div class="actions" id="presets" aria-label="Damping presets">
+      <button type="button" data-damping="2">Underdamped</button>
+      <button type="button" data-damping="4">Critically damped</button>
+      <button type="button" data-damping="6">Overdamped</button>
+    </div>
+    <div class="sliders">
+      <label>Mass <i>m</i> · <output id="mass-value" for="mass"></output> kg
+        <input id="mass" type="range" min="0.5" max="3" step="0.1" value="1">
+      </label>
+      <label>Damping <i>b</i> · <output id="damping-value" for="damping"></output> N·s/m
+        <input id="damping" type="range" min="0.5" max="16" step="0.1" value="2">
+      </label>
+      <label>Spring stiffness <i>k</i> · <output id="spring-value" for="spring"></output> N/m
+        <input id="spring" type="range" min="1" max="12" step="0.1" value="4">
+      </label>
+    </div>
+    <p id="model"></p>
+    <p id="gain"></p>
+    <details class="formulas">
+      <summary>Model and formulas from the lecture</summary>
+      <p><b>Transfer function.</b> G(s) = 1/(ms² + bs + k) = Kωₙ²/(s² + 2ζωₙs + ωₙ²).</p>
+      <p><b>Parameters.</b> K = 1/k is the static gain, ωₙ = √(k/m) is the natural frequency, and ζ = b/(2√(mk)) is the damping ratio. The slides call ζ the damping coefficient. Here b is the physical damper constant.</p>
+      <p><b>Step response.</b> The formulas below assume zero initial displacement and velocity. A<sub>step</sub> is the force-step amplitude (1 N). The graph shows y(t)/(KA<sub>step</sub>), so the final value is 1 on the graph.</p>
+      <p><b>Underdamped.</b> y(t)/(KA<sub>step</sub>) = 1 − e<sup>−δt</sup> sin(ω<sub>d</sub>t + φ)/√(1 − ζ²), where δ = ζωₙ, ω<sub>d</sub> = ωₙ√(1 − ζ²) and φ = arccos(ζ).</p>
+      <p><b>Critically damped.</b> y(t)/(KA<sub>step</sub>) = 1 − (1 + ωₙt)e<sup>−ωₙt</sup>.</p>
+      <p><b>Overdamped.</b> y(t)/(KA<sub>step</sub>) = 1 − (s₂e<sup>s₁t</sup> − s₁e<sup>s₂t</sup>)/(s₂ − s₁), with real poles s₁, s₂ = −ζωₙ ± ωₙ√(ζ² − 1).</p>
+      <p><b>Underdamped peak.</b> t<sub>p</sub> = π/ω<sub>d</sub>. The fractional overshoot is M<sub>p</sub> = e<sup>−πζ/√(1 − ζ²)</sup>. Multiply by 100 for percent overshoot.</p>
+      <p><b>Underdamped first crossing of the final value.</b> The formula on slide 68 uses the first positive angle solving tan(ω<sub>d</sub>t) = −ω<sub>d</sub>/δ. This gives (π − φ)/ω<sub>d</sub> <span id="final-crossing"></span>.</p>
+      <p class="caption">Lecture slides 40–41, 60–63 and 68–69.</p>
+    </details>
+  </section>
+
+  <section class="panel">
+    <h2>Step response</h2>
+    <p class="caption">The curve shows displacement divided by its final value. The dashed line marks 100% and the shading marks the ±5% settling band. Dots show the first 90% crossing, the peak when present, and the final entry into the band.</p>
+    <canvas id="response" class="chart" role="img" aria-label="Normalized displacement over time"></canvas>
+    <dl class="metrics">
+      <div><dt>Rise time t<sub>r</sub> (to 90%)</dt><dd id="rise"></dd></div>
+      <div><dt>Peak time t<sub>p</sub></dt><dd id="peak"></dd></div>
+      <div><dt>Peak overshoot M<sub>p</sub></dt><dd id="overshoot"></dd></div>
+      <div><dt>Settling time t<sub>s</sub> (±5%)</dt><dd id="settling"></dd></div>
+    </dl>
+  </section>
+
+  <div class="plots">
+    <section class="panel">
+      <h2>Poles and eigenvalues</h2>
+      <p class="caption">Crosses are transfer-function poles. Rings are eigenvalues of A.</p>
+      <canvas id="poles" class="chart" role="img" aria-label="Poles and eigenvalues in the complex plane"></canvas>
+      <p id="pole-values"></p>
+      <p id="eigen-values"></p>
+    </section>
+    <section class="panel">
+      <h2>Phase plane</h2>
+      <p class="caption">The path starts at rest (dark dot) and approaches equilibrium (amber dot).</p>
+      <canvas id="phase" class="chart" role="img" aria-label="Velocity versus displacement during the step response"></canvas>
+    </section>
+  </div>
+
+  <section class="panel">
+    <h2>State-space model</h2>
+    <p>State x₁ is displacement and x₂ is velocity. The model is ẋ = Ax + BF and y = Cx, with F = 1 N during the step.</p>
+    <pre id="matrices"></pre>
+  </section>
+
+  <section class="panel">
+    <h2>Homework validation</h2>
+    <table>
+      <thead><tr><th scope="col">Check</th><th scope="col">Expected</th><th scope="col">Computed</th><th scope="col">Result</th></tr></thead>
+      <tbody id="validation"></tbody>
+    </table>
+  </section>
+</main>
+
+<script src="script.js"></script>
+</body>
+</html>
