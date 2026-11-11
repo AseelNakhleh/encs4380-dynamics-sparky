@@ -44,6 +44,17 @@ Modules 1–3 display the expected values, calculated results, and pass/fail sta
 ## Screenshots
 **Module 1. First-Order Time Response**
 
+**Developed by Hala Tarifi**
+
+#### Step Response
+<img src="HalaTarifi1230624_Module1/ScreenShots/First-order%20step%20response%20.png" width="650">
+
+#### Ramp Response
+<img src="HalaTarifi1230624_Module1/ScreenShots/First-order%20Tamp%20response.png" width="650">
+
+#### Error Fraction
+<img src="HalaTarifi1230624_Module1/ScreenShots/First-order%20error%20fraction.png" width="650">
+
 **Module 2. First-Order Frequency Response**
 ### Input and Output Sine Waves
 
