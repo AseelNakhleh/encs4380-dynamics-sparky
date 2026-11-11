@@ -5,8 +5,6 @@
 
 ## Run the module
 
-Open [index.html](index.html) in a browser. Keep `index.html`, `script.js`, and `style.css` in the same folder. The page runs locally without a server or installation.
-
 ## Explore the simulator
 
 1. Choose a prediction about critical damping, then select **Check on the plot**.
