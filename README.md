@@ -43,7 +43,9 @@ Modules 1–3 display the expected values, calculated results, and pass/fail sta
 
 ## Screenshots
 **Module 1. First-Order Time Response**
+
 **Module 2. First-Order Frequency Response**
+
 **Module 3. Second-order response**
 
 
