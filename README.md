@@ -51,10 +51,11 @@ Modules 1–3 display the expected values, calculated results, and pass/fail sta
 
 ![Second-order challenge showing the guessed and true curves](MohammadAbuadiyah_1220270_Module4/Mohammadabuadiyah_1220270_module4/screenshots/second-order-results.png)
 
-## AI assistance
+## AI Assistance
 
-- **Module 1:** ChatGPT assisted with HTML, CSS, and JavaScript development, interactive plots, debugging, and checking the equations.
-- **Module 2:** ChatGPT assisted with JavaScript, plot improvements, debugging, and verifying calculations.
-- **Module 3:** AI was used to help with the concepts behind Module 3, check and test its behavior, and draft this README.
-- **Module 4:** AI tools helped implement and test the challenge.
-- AI assisted with drafting this repository README.
+Module 1: ChatGPT was used to explain concepts and assist with coding and debugging.
+Module 2: ChatGPT helped with understanding concepts, coding, and testing.
+Module 3: AI was used to help understand the concepts, check and test the module's behavior, and draft the README.
+Module 4: AI tools assisted with understanding the concepts, implementing features, and testing the challenge.
+
+README: AI assisted with organizing and drafting the repository documentation.
