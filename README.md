@@ -7,7 +7,7 @@ Sparky is a browser-based toolkit for exploring the time and frequency responses
 
 ## Team and modules
 
-| Module | Developer | What you can explore |
+| Module | Developer | Responsibilities|
 | --- | --- | --- |
 | [1 · First-order time response](HalaTarifi1230624_Module1/README.md) | Hala Tarifi (1230624) | Change gain and time constant. Compare step and ramp responses, measure ramp lag and steady-state error, and inspect the logarithmic error plot. |
 | [2 · First-order frequency response](AseelNakhleh1230736_Module2/README.md) | Aseel Nakhleh (1230736) | Vary the time constant and input frequency. Compare input and output sine waves, inspect the Bode plots and cutoff, and calculate dynamic error. |
