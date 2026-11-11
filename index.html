@@ -1,0 +1,453 @@
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Dynamic Characteristics Toolkit</title>
+
+    <style>
+
+        /* General Settings */
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            direction: ltr;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f4f7fc;
+            color: #24324a;
+            direction: ltr;
+        }
+
+        /* Header */
+
+        header {
+            background-color: #243b72;
+            color: white;
+            text-align: center;
+            padding: 35px 20px 45px;
+        }
+
+        .team {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+            direction: ltr;
+        }
+
+        .team img {
+            width: 50px;
+            height: 50px;
+            object-fit: cover;
+            border-radius: 12px;
+        }
+
+        .team span {
+            font-size: 24px;
+            font-weight: bold;
+            color: white;
+        }
+
+        header h1 {
+            font-size: 34px;
+            margin: 10px 0 18px;
+            text-align: center;
+        }
+
+        header p {
+            font-size: 17px;
+            line-height: 1.7;
+            text-align: center;
+            margin: 0;
+        }
+
+        /* Main Container */
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 45px 25px;
+        }
+
+        /* Introduction */
+
+        .intro {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        .intro h2 {
+            color: #243b72;
+            font-size: 30px;
+            margin-bottom: 12px;
+            text-align: center;
+        }
+
+        .intro p {
+            color: #596579;
+            font-size: 16px;
+            line-height: 1.7;
+            text-align: center;
+        }
+
+        /* Module Cards Layout */
+
+        .modules {
+            display: grid;
+            grid-template-columns:
+                repeat(2, minmax(0, 1fr));
+            gap: 25px;
+            direction: ltr;
+        }
+
+        /* Individual Module Card */
+
+        .card {
+            background-color: white;
+            border: 1px solid #dce4f2;
+            border-radius: 16px;
+            padding: 30px;
+
+            direction: ltr;
+            text-align: left;
+
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+
+            box-shadow: 0 4px 12px
+                rgba(0, 0, 0, 0.08);
+
+            transition: transform 0.3s,
+                        box-shadow 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+
+            box-shadow: 0 8px 20px
+                rgba(0, 0, 0, 0.12);
+        }
+
+        /* Module Titles */
+
+        .card h3 {
+            font-size: 25px;
+            color: #243b72;
+            margin: 0 0 10px;
+
+            direction: ltr;
+            text-align: left;
+            width: 100%;
+        }
+
+        .card h4 {
+            font-size: 19px;
+            color: #24324a;
+            margin: 0 0 15px;
+
+            direction: ltr;
+            text-align: left;
+            width: 100%;
+        }
+
+        /* Module Descriptions */
+
+        .card p {
+            color: #596579;
+            font-size: 16px;
+            line-height: 1.7;
+            margin: 0 0 20px;
+
+            direction: ltr;
+            text-align: left;
+            width: 100%;
+        }
+
+        /* Module Buttons */
+
+        .button {
+            display: inline-block;
+            margin-top: auto;
+            padding: 12px 22px;
+
+            background-color: #243b72;
+            color: white;
+
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: bold;
+
+            direction: ltr;
+            text-align: center;
+            align-self: flex-start;
+
+            transition: background-color 0.3s;
+        }
+
+        .button:hover {
+            background-color: #3659a0;
+        }
+
+        .button:focus-visible {
+            outline: 3px solid #75a8ff;
+            outline-offset: 3px;
+        }
+
+        /* Footer */
+
+        footer {
+            background-color: #243b72;
+            color: white;
+            text-align: center;
+            padding: 25px 15px;
+            margin-top: 30px;
+        }
+
+        footer p {
+            margin: 0;
+            line-height: 1.8;
+            font-size: 15px;
+            text-align: center;
+        }
+
+        /* Mobile Responsive Design */
+
+        @media (max-width: 650px) {
+
+            header {
+                padding: 30px 15px;
+            }
+
+            header h1 {
+                font-size: 25px;
+            }
+
+            header p {
+                font-size: 14px;
+            }
+
+            .team img {
+                width: 40px;
+                height: 40px;
+            }
+
+            .team span {
+                font-size: 20px;
+            }
+
+            .container {
+                padding: 30px 15px;
+            }
+
+            .intro h2 {
+                font-size: 24px;
+            }
+
+            .modules {
+                grid-template-columns: 1fr;
+                direction: ltr;
+            }
+
+            .card {
+                padding: 22px;
+                text-align: left;
+            }
+
+            .card h3 {
+                font-size: 22px;
+            }
+
+            .card h4 {
+                font-size: 17px;
+            }
+
+            .card p {
+                font-size: 14px;
+            }
+
+            .button {
+                font-size: 14px;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <!-- Header -->
+
+    <header>
+
+        <div class="team">
+
+            <img src="sparky.png"
+                 alt="Team Sparky Logo">
+
+            <span>Team Sparky</span>
+
+        </div>
+
+        <h1>Dynamic Characteristics Toolkit</h1>
+
+        <p>
+            ENCS4380 - Interfacing Techniques
+            <br>
+            Birzeit University - Homework 1
+        </p>
+
+    </header>
+
+
+    <!-- Main Content -->
+
+    <main class="container">
+
+        <div class="intro">
+
+            <h2>Explore the Four Modules</h2>
+
+            <p>
+                This interactive toolkit demonstrates
+                the dynamic behavior of sensors and
+                systems through simulations,
+                plots, and interactive activities.
+            </p>
+
+        </div>
+
+
+        <!-- Four Modules -->
+
+        <div class="modules">
+
+
+            <!-- Module 1 -->
+
+            <div class="card">
+
+                <h3>Module 1</h3>
+
+                <h4>First-Order Time Response</h4>
+
+                <p>
+                    Explore step and ramp responses,
+                    time constants, response delay,
+                    and steady-state error.
+                </p>
+
+                <a
+                  href="HalaTarifi1230624_Module1/index.html"
+                  class="button">
+                    Open Module 1
+                </a>
+
+            </div>
+
+
+            <!-- Module 2 -->
+
+            <div class="card">
+
+                <h3>Module 2</h3>
+
+                <h4>First-Order Frequency Response</h4>
+
+                <p>
+                    Explore input and output sine waves,
+                    amplitude ratio, phase lag,
+                    Bode plots, and dynamic error.
+                </p>
+
+                <a
+                  href="AseelNakhleh1230736_Module2/module2.html"
+                  class="button">
+                    Open Module 2
+                </a>
+
+            </div>
+
+
+            <!-- Module 3 -->
+
+            <div class="card">
+
+                <h3>Module 3</h3>
+
+                <h4>Second-Order Response</h4>
+
+                <p>
+                    Explore underdamped, critically
+                    damped, and overdamped responses,
+                    overshoot, settling time,
+                    and state-space behavior.
+                </p>
+
+                <a
+                  href="SamirHazboun1230807_module3/index.html"
+                  class="button">
+                    Open Module 3
+                </a>
+
+            </div>
+
+
+            <!-- Module 4 -->
+
+            <div class="card">
+
+                <h3>Module 4</h3>
+
+                <h4>Guess the Sensor Challenge</h4>
+
+                <p>
+                    Test your understanding by
+                    identifying unknown sensor
+                    parameters from response curves
+                    and comparing your predictions
+                    with the correct values.
+                </p>
+
+                <a
+                  href="MohammadAbuadiyah_1220270_Module4/Mohammadabuadiyah_1220270_module4/index.html"
+                  class="button">
+                    Open Module 4
+                </a>
+
+            </div>
+
+
+        </div>
+
+    </main>
+
+
+    <!-- Footer -->
+
+    <footer>
+
+        <p>
+            ENCS4380 - Dynamic Characteristics Toolkit
+            <br>
+            Birzeit University | Team Sparky | 2026
+        </p>
+
+    </footer>
+
+</body>
+</html>
