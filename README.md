@@ -45,6 +45,17 @@ Modules 1–3 display the expected values, calculated results, and pass/fail sta
 **Module 1. First-Order Time Response**
 
 **Module 2. First-Order Frequency Response**
+### Input and Output Sine Waves
+
+<img src="AseelNakhleh1230736_Module2/ScreenShots/InputOutputSinwaves.png" width="650">
+
+### Bode Magnitude Plot
+
+<img src="AseelNakhleh1230736_Module2/ScreenShots/Bode%20Plots%28Bode%20Magnitude%29.png" width="650">
+
+### Bode Phase Plot
+
+<img src="AseelNakhleh1230736_Module2/ScreenShots/BodePlots%28Bode%20Phase%29.png" width="650">
 
 **Module 3. Second-order response**
 
