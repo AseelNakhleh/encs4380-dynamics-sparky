@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="ENCS4380 Module 4 — Guess the Sensor: a standalone interactive dynamic-characteristics challenge.">
+  <title>Guess the Sensor | ENCS4380 Module 4</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <div class="page-shell">
+    <header class="topbar">
+      <a class="brand" href="index.html" aria-label="Guess the Sensor home">
+        <span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span></span>
+        <span><strong>DYNAMIC LAB</strong><small>ENCS4380 / Interfacing Techniques</small></span>
+      </a>
+      <div class="topbar-right"><span class="topbar-badge"><span class="status-dot"></span> Interactive toolkit</span><span class="course-tag">MODULE 04 / 04</span></div>
+    </header>
+
+    <main>
+      <section class="intro" aria-labelledby="page-title">
+        <div class="intro-copy">
+          <p class="eyebrow"><span class="eyebrow-line"></span> SYSTEM IDENTIFICATION CHALLENGE</p>
+          <h1 id="page-title">Guess the <em>sensor.</em></h1>
+          <p class="intro-description">One mystery sensor. One measured response. Read the curve, estimate its hidden parameters, and see how close your engineering intuition gets.</p>
+        </div>
+        <div class="intro-symbol" aria-hidden="true">
+          <svg viewBox="0 0 180 120" role="img"><path d="M4 90H176" stroke="#73809a" stroke-opacity=".45" stroke-dasharray="3 5"/><path d="M12 96V12" stroke="#73809a" stroke-opacity=".4" stroke-dasharray="3 5"/><path d="M12 90C34 90 36 88 48 55S70 20 86 33 106 83 124 55 149 24 174 41" fill="none" stroke="#66d4df" stroke-width="4" stroke-linecap="round"/><circle cx="86" cy="33" r="6" fill="#64e0b5"/><circle cx="86" cy="33" r="12" fill="none" stroke="#64e0b5" stroke-opacity=".35"/></svg>
+        </div>
+      </section>
+
+      <section class="stat-strip" aria-label="Current session statistics">
+        <div class="stat"><div class="stat-label">CURRENT ROUND</div><div class="stat-value"><span id="round-number">01</span><span class="stat-note">/ mystery sensor</span></div></div>
+        <div class="stat"><div class="stat-label">SESSION SCORE</div><div class="stat-value"><span id="total-score">0</span><span class="stat-note">/ <span id="maximum-score">0</span> pts</span></div></div>
+        <div class="stat"><div class="stat-label">ROUNDS COMPLETED</div><div class="stat-value"><span id="rounds-completed">0</span><span class="stat-note">challenges scored</span></div></div>
+      </section>
+
+      <section class="game-layout" aria-label="Sensor guessing challenge">
+        <section class="panel chart-panel" aria-labelledby="chart-title">
+          <div class="panel-heading">
+            <div>
+              <p class="overline">01 / OBSERVE</p>
+              <h2 id="chart-title">Measured response</h2>
+            </div>
+            <span class="live-chip"><span class="live-blink"></span> LIVE DATA</span>
+          </div>
+          <div class="sensor-meta">
+            <div class="sensor-meta-item"><span>MODEL</span><strong id="sensor-model">First-order system</strong></div>
+            <div class="sensor-meta-item"><span>INPUT SIGNAL</span><strong id="sensor-input">Unit step · x(t) = 1</strong></div>
+            <div class="sensor-meta-item"><span>HIDDEN VALUES</span><strong id="hidden-tag"><span class="lock-icon" aria-hidden="true">▣</span> Locked</strong></div>
+          </div>
+          <div class="plot-frame">
+            <svg id="response-plot" viewBox="0 0 820 410" role="img" aria-labelledby="plot-title plot-desc">
+              <title id="plot-title">Noisy sensor output versus time</title>
+              <desc id="plot-desc">A measured response curve with fixed random noise. After submitting, the true and guessed theoretical responses are overlaid.</desc>
+            </svg>
+          </div>
+          <div class="plot-legend" aria-label="Plot legend">
+            <span><i class="legend-line measured"></i>Measured (noisy)</span>
+            <span id="input-legend" hidden><i class="legend-line input-line"></i>Input sine</span>
+            <span id="true-legend" hidden><i class="legend-line true-line"></i>True response</span>
+            <span id="guess-legend" hidden><i class="legend-line guess-line"></i>Your model</span>
+          </div>
+          <p id="chart-description" class="chart-description">The same noisy measurement remains fixed until you start a new round. Hover or touch the curve to inspect values.</p>
+          <div class="plot-bottom"><span><span class="micro-dot"></span> Simulated measurement noise enabled</span><span id="chart-frequency">STEP RESPONSE</span></div>
+        </section>
+
+        <section class="panel controls-panel" aria-labelledby="guess-title">
+          <div class="panel-heading">
+            <div><p class="overline">02 / ESTIMATE</p><h2 id="guess-title">Your hypothesis</h2></div>
+            <span id="round-status" class="status-pill">NOT SUBMITTED</span>
+          </div>
+          <p class="controls-intro" id="estimate-instruction">Estimate the parameters from the plotted response. The actual values are hidden until you submit.</p>
+
+          <form id="guess-form" novalidate>
+            <div class="field-stack">
+              <label class="field-label" for="parameter-one"><span id="parameter-one-name">Static gain <b>K</b></span><span id="parameter-one-unit" class="field-unit">unitless</span></label>
+              <div class="number-box"><input type="number" id="parameter-one" name="p1" min="0.001" max="100" step="any" inputmode="decimal" placeholder="Enter your estimate" required autocomplete="off"><span id="parameter-one-suffix" aria-hidden="true">K</span></div>
+              <label class="field-label" for="parameter-two"><span id="parameter-two-name">Time constant <b>τ</b></span><span id="parameter-two-unit" class="field-unit">seconds</span></label>
+              <div class="number-box"><input type="number" id="parameter-two" name="p2" min="0.001" max="100" step="any" inputmode="decimal" placeholder="Enter your estimate" required autocomplete="off"><span id="parameter-two-suffix" aria-hidden="true">s</span></div>
+            </div>
+            <div class="prediction-box" id="prediction-box">
+              <div class="prediction-title"><span class="prediction-icon" aria-hidden="true">↗</span><strong>Predict, then check</strong></div>
+              <p id="prediction-question">Is the time constant larger than 1.4 seconds?</p>
+              <div class="prediction-choices" role="group" aria-label="Predict yes or no">
+                <button id="prediction-yes" type="button" class="choice-button" aria-pressed="false">Yes</button>
+                <button id="prediction-no" type="button" class="choice-button" aria-pressed="false">No</button>
+              </div>
+              <p id="prediction-outcome" class="prediction-outcome" aria-live="polite"></p>
+            </div>
+            <div class="hint-section">
+              <button class="hint-toggle" id="hint-button" type="button" aria-expanded="false" aria-controls="hint-panel"><span>✳</span> Need a hint?<span id="hint-chevron" class="hint-chevron">+</span></button>
+              <div class="hint-panel" id="hint-panel" hidden><p id="hint-text"></p></div>
+            </div>
+            <p class="form-error" id="form-error" role="alert" aria-live="polite"></p>
+            <button class="primary-button" id="submit-button" type="submit">Reveal &amp; score my guess <span aria-hidden="true">↗</span></button>
+          </form>
+          <button class="secondary-button" id="new-button" type="button"><span aria-hidden="true">↻</span> New sensor</button>
+          <p class="fine-print">A score of 100/100 means <strong>both</strong> estimated parameters are within 10% of their true values. One scored attempt per round.</p>
+        </section>
+      </section>
+
+      <section class="result-panel" id="result-panel" hidden aria-labelledby="result-title">
+        <div class="result-heading"><div><p class="overline">03 / ANALYZE</p><h2 id="result-title">The sensor revealed</h2><p id="result-subtitle" class="result-subtitle">Compare your estimate to the exact model and the noisy measurement.</p></div><div class="score-bubble"><span>ROUND SCORE</span><strong id="round-score">0</strong><small>/ 100</small></div></div>
+        <div class="result-grid" id="result-grid"></div>
+        <div class="result-note"><span class="info-icon">i</span><p id="result-explanation"></p></div>
+      </section>
+
+      <section class="how-it-works" aria-labelledby="how-title">
+        <div class="how-header"><p class="overline">THE LEARNING LOOP</p><h2 id="how-title">Observe. Estimate. Verify.</h2></div>
+        <div class="how-grid">
+          <div class="how-card"><span class="how-number">01</span><h3>Read the shape</h3><p>A slowly rising curve suggests a large time constant. Overshoot indicates an underdamped second-order system.</p></div>
+          <div class="how-card"><span class="how-number">02</span><h3>Find useful landmarks</h3><p>Use the 63.2% point for first-order steps, phase lag for sines, or peak overshoot and time for second-order steps.</p></div>
+          <div class="how-card"><span class="how-number">03</span><h3>Test your model</h3><p>After submitting, compare the theoretical response of your estimate to the true curve. Iterate on a new sensor.</p></div>
+        </div>
+      </section>
+    </main>
+    <footer><span>ENCS4380 · Dynamic Characteristics Interactive Toolkit</span><span>Module 4 · Browser-only · No server required</span></footer>
+  </div>
+</body>
+</html>
