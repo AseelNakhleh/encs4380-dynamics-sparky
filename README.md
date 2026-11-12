@@ -77,6 +77,17 @@ Both validation checks passed successfully.
 
 <img src="AseelNakhleh1230736_Module2/ScreenShots/BodePlots%28Bode%20Phase%29.png" width="650">
 
+The following validation checks verify the accuracy of the first-order frequency response calculations:
+
+- Amplitude Ratio: Expected 0.93.
+- Phase Lag: Expected 21.8°.
+- Maximum Time Constant: Expected 0.52 ms.
+- Phase Lag at 50 Hz: Expected 9.3°.
+
+All four validation results passed successfully.
+
+<img src="AseelNakhleh1230736_Module2/ScreenShots/Passs.png" alt="Module 2 Validation Tests" width="650">
+
 **Module 3. Second-order response**
 **Developed by Samir Hazboun**
 
