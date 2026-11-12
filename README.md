@@ -69,6 +69,51 @@ Modules 1–3 display the expected values, calculated results, and pass/fail sta
 <img src="AseelNakhleh1230736_Module2/ScreenShots/BodePlots%28Bode%20Phase%29.png" width="650">
 
 **Module 3. Second-order response**
+**Developed by Samir Hazboun**
+
+### 1. Step Response Analysis
+
+#### Underdamped System – Step Response and Overshoot
+
+<img src="SamirHazboun1230807_module3/ScreenShots/Second%20order%20response(Underdamped).png" width="650">
+
+#### Critically Damped System – Step Response
+
+<img src="SamirHazboun1230807_module3/ScreenShots/Second%20step%20response%20(critical).png" width="650">
+
+#### Overdamped System – Step Response
+
+<img src="SamirHazboun1230807_module3/ScreenShots/Second%20step%20response%20(over).png" width="650">
+
+
+### 2. State-Space Representation
+
+#### Underdamped System – State-Space Model
+
+<img src="SamirHazboun1230807_module3/ScreenShots/StateSpaceModel%20(Underdamped).png" width="650">
+
+#### Critically Damped System – State-Space Model
+
+<img src="SamirHazboun1230807_module3/ScreenShots/State%20space%20model%20(Critical%20dampes).png" width="650">
+
+#### Overdamped System – State-Space Model
+
+<img src="SamirHazboun1230807_module3/ScreenShots/State%20space%20model%20(overdamped).png" width="650">
+
+
+### 3. Poles, Eigenvalues, and Phase-Plane Analysis
+
+#### Underdamped System – Complex Poles and Phase Plane
+
+<img src="SamirHazboun1230807_module3/ScreenShots/Under.png" width="650">
+
+#### Critically Damped System – Repeated Real Poles and Phase Plane
+
+<img src="SamirHazboun1230807_module3/ScreenShots/Criticaldamped.png" width="650">
+
+#### Overdamped System – Distinct Real Poles and Phase Plane
+
+<img src="SamirHazboun1230807_module3/ScreenShots/Over%20Damped.png" width="650">
 
 
 **Module 4 · First-order step results**
