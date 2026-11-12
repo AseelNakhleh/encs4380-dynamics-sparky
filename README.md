@@ -135,6 +135,16 @@ All four validation results passed successfully.
 
 <img src="SamirHazboun1230807_module3/ScreenShots/Over%20Damped.png" width="650">
 
+The following validation checks verify the accuracy of the second-order response and state-space model:
+
+- Test 4: Overshoot at ζ = 0.5 — Expected 16.3%.
+- Test 5: Overshoot at ζ = 1 — Expected 0%.
+- Test 6: Eigenvalues equal poles — Expected −1 ± j1.732.
+
+All three validation tests passed successfully.
+
+<img src="SamirHazboun1230807_module3/ScreenShots/Pass.png" alt="Module 3 Validation Tests" width="650">
+
 
 **Module 4 · First-order step results**
 
