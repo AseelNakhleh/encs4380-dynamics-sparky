@@ -41,6 +41,12 @@ Modules 1–3 display the expected values, calculated results, and pass/fail sta
 | 5 · Second-order step with ζ = 1 | 3 | 0% overshoot |
 | 6 · State space with m = 1, b = 2, k = 4 | 3 | State-matrix eigenvalues and transfer-function poles both equal −1 ± j1.732 |
 
+## Live Website
+
+The Dynamic Characteristics Interactive Toolkit is hosted on GitHub Pages. The website provides access to all four interactive modules developed by Team Sparky.
+
+**Website Link:** [https://aseelnakhleh.github.io/encs4380-dynamics-sparky/](https://aseelnakhleh.github.io/encs4380-dynamics-sparky/)
+
 ## Screenshots
 **Module 1. First-Order Time Response**
 
