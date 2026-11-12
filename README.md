@@ -55,6 +55,15 @@ Modules 1–3 display the expected values, calculated results, and pass/fail sta
 #### Error Fraction
 <img src="HalaTarifi1230624_Module1/ScreenShots/First-order%20error%20fraction.png" width="650">
 
+The following validation checks verify the accuracy of the first-order sensor model:
+
+- Step response at t = τ: Expected 63.2%.
+- Step response at t = 3τ: Expected 95.0%.
+
+Both validation checks passed successfully.
+
+<img src="HalaTarifi1230624_Module1/ScreenShots/Pass.png" alt="Module 1 Validation Tests" width="650">
+
 **Module 2. First-Order Frequency Response**
 ### Input and Output Sine Waves
 
