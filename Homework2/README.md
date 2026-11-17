@@ -14,12 +14,6 @@ The PID Control Toolkit is an extension of our Homework 1 project. It allows use
 | P3 · Digital PID | Samir Hazboun (1230807) | Explore digital PID control, sampling time, and anti-windup. Generate Arduino code using the selected controller parameters. |
 | P4 · Tuning Challenge | Mohammad Abuadiyah (1220270) | Tune PID parameters for randomly generated systems, meet performance requirements, and evaluate results using PASS/FAIL checks and scores. |
 
-## Run Locally
-
-1. Clone the repository or use **Code → Download ZIP** and extract it.
-2. Open the desired module's HTML file in your browser.
-3. Keep its JavaScript and CSS files in their corresponding folders.
-
 ### Module Files
 
 The planned folder structure is:
