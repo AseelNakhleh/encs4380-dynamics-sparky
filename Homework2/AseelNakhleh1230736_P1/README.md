@@ -29,40 +29,45 @@ Users can adjust the controller and plant parameters, observe the system respons
 
 The first-order system is represented by:
 
-\[
+$$
 G(s) = \frac{K}{\tau s + 1}
-\]
+$$
 
 where:
 
-- \(K\) is the plant gain.
-- \(\tau\) is the time constant.
+- $K$ is the plant gain.
+- $\tau$ is the time constant.
 
 ### Second-Order Plant
 
 The second-order system is represented by:
 
-\[
+$$
 G(s) = \frac{K\omega_n^2}{s^2 + 2\zeta\omega_n s + \omega_n^2}
-\]
+$$
 
 where:
 
-- \(\omega_n\) is the natural frequency.
-- \(\zeta\) is the damping ratio.
+- $\omega_n$ is the natural frequency.
+- $\zeta$ is the damping ratio.
 
 ### PID Controller
 
 The PID control law is:
 
-\[
+$$
 u(t) = K_p e(t) + K_i \int_0^t e(\lambda)\,d\lambda + K_d \frac{de(t)}{dt}
-\]
+$$
 
-where \(e(t)\) is the difference between the setpoint and the system output.
+where:
+
+- $u(t)$ is the control signal.
+- $e(t)$ is the difference between the setpoint and system output.
+- $K_p$ is the proportional gain.
+- $K_i$ is the integral gain.
+- $K_d$ is the derivative gain.
 
 The simulation uses the Euler numerical method to calculate the closed-loop response over time.
-
 ## Run Locally
 
 1. Download or clone the GitHub repository.
