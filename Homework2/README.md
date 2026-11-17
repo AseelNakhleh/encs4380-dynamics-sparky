@@ -73,37 +73,37 @@ AI tools were used to help us understand PID control concepts and clarify some t
 
 The PID Playground allows users to adjust the plant parameters, proportional gain (Kp), integral gain (Ki), derivative gain (Kd), and setpoint.
 
-<img src="P1/ScreenShots/PI_Parameters.png" width="650">
+<img src="AseelNakhleh1230736_P1/ScreenShots/PI_Parameters.png" width="650">
 
 #### 2. Closed-Loop Block Diagram
 
 The block diagram illustrates the PID controller, plant, and negative feedback path used in the closed-loop control system.
 
-<img src="P1/ScreenShots/PI_Blockdiagram.png" width="650">
+<img src="AseelNakhleh1230736_P1/ScreenShots/PI_Blockdiagram.png" width="650">
 
 #### 3. Closed-Loop Step Response
 
 The graph compares the desired setpoint with the actual system output and shows how the system responds to the selected PID parameters.
 
-<img src="P1/ScreenShots/PID-Closed-Loop%20Step%20Response.png" width="650">
+<img src="AseelNakhleh1230736_P1/ScreenShots/PID-Closed-Loop%20Step%20Response.png" width="650">
 
 #### 4. Control Signal
 
 The control signal plot shows the PID controller output and its upper and lower saturation limits.
 
-<img src="P1/ScreenShots/Control%20Signal.png" width="650">
+<img src="AseelNakhleh1230736_P1/ScreenShots/Control%20Signal.png" width="650">
 
 #### 5. Performance Metrics
 
 The simulation calculates rise time, overshoot, settling time, and steady-state error to evaluate the system's performance.
 
-<img src="P1/ScreenShots/Performance.png" width="650">
+<img src="AseelNakhleh1230736_P1/ScreenShots/Performance.png" width="650">
 
 #### 6. Predict, Then Check
 
 Users predict how increasing the integral gain affects the steady-state error and compare their prediction with the simulation results.
 
-<img src="P1/ScreenShots/Decreases.png" width="650">
+<img src="AseelNakhleh1230736_P1/ScreenShots/Decreases.png" width="650">
 
 #### 7. Validation Tests
 
@@ -111,4 +111,4 @@ The validation checks compare the theoretical expected values with the calculate
 
 All five displayed validation results passed successfully.
 
-<img src="P1/ScreenShots/Validation.png" width="650">
+<img src="AseelNakhleh1230736_P1/ScreenShots/Validation.png" width="650">
