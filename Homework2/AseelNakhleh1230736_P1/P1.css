@@ -1,0 +1,367 @@
+/* =====================================
+   GENERAL STYLING
+===================================== */
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    direction: ltr;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f4f7fc;
+    color: #24324a;
+    direction: ltr;
+    text-align: left;
+}
+
+/* =====================================
+   HEADER
+===================================== */
+
+header {
+    background: #243b72;
+    color: white;
+    text-align: center;
+    padding: 45px 20px;
+}
+
+header h1 {
+    font-size: 34px;
+    margin: 0 0 15px;
+}
+
+header p {
+    font-size: 16px;
+    margin: 8px 0;
+}
+
+/* =====================================
+   MAIN CONTAINER
+===================================== */
+
+.container {
+    max-width: 1100px;
+    margin: auto;
+    padding: 35px 20px;
+}
+
+/* =====================================
+   SECTIONS
+===================================== */
+
+section {
+    background: #ffffff;
+    border-radius: 14px;
+    padding: 30px;
+    margin-bottom: 25px;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.07);
+}
+
+section h2 {
+    text-align: center;
+    color: #243b72;
+    font-size: 23px;
+    margin-top: 0;
+    margin-bottom: 25px;
+}
+
+section p {
+    font-size: 15px;
+    line-height: 1.7;
+}
+
+/* =====================================
+   SLIDERS AND PARAMETERS
+===================================== */
+
+.parameter-row {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin: 22px 0;
+    flex-wrap: wrap;
+}
+
+.parameter-row label {
+    flex: 0 0 210px;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.parameter-row input[type="range"] {
+    flex: 1;
+    min-width: 160px;
+    accent-color: #3659a0;
+    cursor: pointer;
+}
+
+.parameter-row span {
+    min-width: 85px;
+    font-weight: bold;
+    color: #243b72;
+}
+
+select {
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #cbd5e1;
+    font-size: 15px;
+    max-width: 100%;
+    background: white;
+    color: #24324a;
+}
+
+/* =====================================
+   BUTTONS
+===================================== */
+
+button {
+    background: #243b72;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 20px;
+    margin: 10px 8px 10px 0;
+    font-size: 15px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+button:hover:not(:disabled) {
+    background: #3659a0;
+}
+
+button:disabled {
+    background: #a3aec0;
+    cursor: not-allowed;
+}
+
+/* =====================================
+   PREDICTION RESULT
+===================================== */
+
+#predictionResult {
+    font-weight: bold;
+    padding: 10px 0;
+    min-height: 24px;
+}
+
+/* =====================================
+   BLOCK DIAGRAM
+===================================== */
+
+.diagram {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    padding: 25px 15px;
+    background: #eef3fc;
+    border-radius: 10px;
+}
+
+.diagram span {
+    font-size: 15px;
+    font-weight: bold;
+    color: #243b72;
+}
+
+.diagram span:nth-child(odd) {
+    background: white;
+    padding: 12px 15px;
+    border: 1px solid #b9c8e6;
+    border-radius: 8px;
+}
+
+.diagram-note {
+    text-align: center;
+    color: #596579;
+    font-size: 14px;
+}
+
+/* =====================================
+   PLOTS
+===================================== */
+
+#responsePlot,
+#controlPlot {
+    width: 100%;
+    min-height: 400px;
+    overflow: hidden;
+}
+
+/* =====================================
+   PERFORMANCE METRICS
+===================================== */
+
+.metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+}
+
+.metric {
+    background: #eef3fc;
+    border-radius: 10px;
+    text-align: center;
+    padding: 25px 15px;
+    border: 1px solid #dce5f5;
+}
+
+.metric h3 {
+    color: #243b72;
+    font-size: 17px;
+    margin-top: 0;
+}
+
+.metric p {
+    font-size: 22px;
+    font-weight: bold;
+    color: #3659a0;
+    margin-bottom: 0;
+}
+
+/* =====================================
+   VALIDATION TABLE
+===================================== */
+
+.table-container {
+    width: 100%;
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    font-size: 14px;
+}
+
+th,
+td {
+    padding: 14px;
+    border: 1px solid #d5deed;
+    text-align: left;
+}
+
+th {
+    background: #243b72;
+    color: white;
+}
+
+tr:nth-child(even) {
+    background: #f4f7fc;
+}
+
+.pass {
+    color: #16a34a;
+    font-weight: bold;
+}
+
+.fail {
+    color: #dc2626;
+    font-weight: bold;
+}
+
+/* =====================================
+   FOOTER
+===================================== */
+
+footer {
+    text-align: center;
+    background: #243b72;
+    color: white;
+    padding: 20px;
+    margin-top: 30px;
+}
+
+footer p {
+    margin: 0;
+    font-size: 14px;
+}
+
+/* =====================================
+   MOBILE RESPONSIVENESS
+===================================== */
+
+@media (max-width: 650px) {
+
+    header {
+        padding: 35px 15px;
+    }
+
+    header h1 {
+        font-size: 27px;
+    }
+
+    .container {
+        padding: 20px 12px;
+    }
+
+    section {
+        padding: 20px 15px;
+        margin-bottom: 18px;
+    }
+
+    section h2 {
+        font-size: 20px;
+    }
+
+    .parameter-row {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+    }
+
+    .parameter-row label {
+        flex: none;
+    }
+
+    .parameter-row input[type="range"] {
+        width: 100%;
+        min-width: 0;
+    }
+
+    .parameter-row span {
+        text-align: left;
+    }
+
+    .metrics-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .diagram {
+        gap: 8px;
+        padding: 20px 10px;
+    }
+
+    .diagram span {
+        font-size: 12px;
+    }
+
+    #responsePlot,
+    #controlPlot {
+        min-height: 320px;
+    }
+
+    button {
+        width: 100%;
+        margin: 8px 0;
+    }
+
+    table {
+        font-size: 12px;
+    }
+
+    th,
+    td {
+        padding: 10px;
+    }
+}

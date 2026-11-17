@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>P1 - PID Playground | Team Sparky</title>
+
+    <link rel="stylesheet" href="P1.css">
+
+    <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+</head>
+
+<body>
+
+    <header>
+        <h1>PID Playground</h1>
+        <p>Homework 2 – PID Control Toolkit</p>
+        <p>ENCS4380 | Team Sparky</p>
+    </header>
+
+    <main class="container">
+
+        <!-- 1. Introduction -->
+        <section>
+            <h2>1. Introduction</h2>
+
+            <p>
+                Explore how proportional, integral,
+                and derivative control affect the
+                response of a dynamic system.
+                Adjust the controller parameters
+                and observe changes in performance.
+            </p>
+        </section>
+
+        <!-- 2. Predict, Then Check -->
+        <section>
+            <h2>2. Predict, Then Check</h2>
+
+            <p>
+                What happens to the steady-state error
+                when the integral gain (Ki) increases?
+            </p>
+
+            <select id="prediction">
+                <option value="">
+                    Choose your prediction
+                </option>
+
+                <option value="increase">
+                    The error increases
+                </option>
+
+                <option value="decrease">
+                    The error decreases
+                </option>
+
+                <option value="same">
+                    The error stays the same
+                </option>
+            </select>
+
+            <button id="savePrediction">
+                Save Prediction
+            </button>
+
+            <button id="checkPrediction" disabled>
+                Check Prediction
+            </button>
+
+            <p id="predictionResult"></p>
+        </section>
+
+        <!-- 3. Plant Parameters -->
+        <section>
+            <h2>3. Plant Parameters</h2>
+
+            <label for="plantType">
+                Select Plant Type:
+            </label>
+
+            <select id="plantType">
+                <option value="first">
+                    First-Order System
+                </option>
+
+                <option value="second">
+                    Second-Order System
+                </option>
+            </select>
+
+            <div class="parameter-row">
+                <label for="gain">
+                    Plant Gain (K):
+                </label>
+
+                <input type="range"
+                       id="gain"
+                       min="0.5"
+                       max="5"
+                       step="0.1"
+                       value="1">
+
+                <span id="gainValue">1.0</span>
+            </div>
+
+            <div id="firstOrderParameters">
+
+                <div class="parameter-row">
+                    <label for="tau">
+                        Time Constant (τ):
+                    </label>
+
+                    <input type="range"
+                           id="tau"
+                           min="0.1"
+                           max="5"
+                           step="0.1"
+                           value="1">
+
+                    <span id="tauValue">1.0 s</span>
+                </div>
+
+            </div>
+
+            <div id="secondOrderParameters"
+                 style="display: none;">
+
+                <div class="parameter-row">
+                    <label for="omegaN">
+                        Natural Frequency (ωn):
+                    </label>
+
+                    <input type="range"
+                           id="omegaN"
+                           min="0.5"
+                           max="10"
+                           step="0.1"
+                           value="2">
+
+                    <span id="omegaNValue">
+                        2.0 rad/s
+                    </span>
+                </div>
+
+                <div class="parameter-row">
+                    <label for="zeta">
+                        Damping Ratio (ζ):
+                    </label>
+
+                    <input type="range"
+                           id="zeta"
+                           min="0.1"
+                           max="2"
+                           step="0.1"
+                           value="0.7">
+
+                    <span id="zetaValue">0.7</span>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- 4. PID Controller -->
+        <section>
+            <h2>4. PID Controller Parameters</h2>
+
+            <div class="parameter-row">
+                <label for="kp">
+                    Proportional Gain (Kp):
+                </label>
+
+                <input type="range"
+                       id="kp"
+                       min="0"
+                       max="20"
+                       step="0.1"
+                       value="1">
+
+                <span id="kpValue">1.0</span>
+            </div>
+
+            <div class="parameter-row">
+                <label for="ki">
+                    Integral Gain (Ki):
+                </label>
+
+                <input type="range"
+                       id="ki"
+                       min="0"
+                       max="10"
+                       step="0.1"
+                       value="0">
+
+                <span id="kiValue">0.0</span>
+            </div>
+
+            <div class="parameter-row">
+                <label for="kd">
+                    Derivative Gain (Kd):
+                </label>
+
+                <input type="range"
+                       id="kd"
+                       min="0"
+                       max="5"
+                       step="0.1"
+                       value="0">
+
+                <span id="kdValue">0.0</span>
+            </div>
+
+            <div class="parameter-row">
+                <label for="setpoint">
+                    Setpoint:
+                </label>
+
+                <input type="range"
+                       id="setpoint"
+                       min="0.5"
+                       max="5"
+                       step="0.1"
+                       value="1">
+
+                <span id="setpointValue">1.0</span>
+            </div>
+        </section>
+
+        <!-- 5. Feedback Diagram -->
+        <section>
+            <h2>5. Closed-Loop Block Diagram</h2>
+
+            <p>
+                The PID controller uses feedback
+                to reduce the difference between
+                the setpoint and the output.
+            </p>
+
+           <div class="diagram">
+
+    <svg viewBox="0 0 700 220"
+         xmlns="http://www.w3.org/2000/svg"
+         style="width:100%; max-width:700px;">
+
+        <defs>
+            <marker id="arrow"
+                    markerWidth="10"
+                    markerHeight="10"
+                    refX="9"
+                    refY="3"
+                    orient="auto">
+                <path d="M0,0 L9,3 L0,6 Z"
+                      fill="#243b72"/>
+            </marker>
+        </defs>
+
+        <g fill="none"
+           stroke="#243b72"
+           stroke-width="2.5"
+           marker-end="url(#arrow)">
+
+            <path d="M30 80 H120"/>
+            <path d="M160 80 H230"/>
+            <path d="M370 80 H430"/>
+            <path d="M560 80 H650"/>
+            <path d="M610 80 V175 H140 V105"/>
+
+        </g>
+
+        <circle cx="140"
+                cy="80"
+                r="20"
+                fill="white"
+                stroke="#243b72"
+                stroke-width="2.5"/>
+
+        <text x="140" y="76"
+              text-anchor="middle"
+              font-size="17">+</text>
+
+        <text x="140" y="93"
+              text-anchor="middle"
+              font-size="17">−</text>
+
+        <rect x="230" y="50"
+              width="140" height="60"
+              rx="8"
+              fill="white"
+              stroke="#243b72"
+              stroke-width="2"/>
+
+        <text x="300" y="85"
+              text-anchor="middle"
+              font-size="18">
+            PID Controller
+        </text>
+
+        <rect x="430" y="50"
+              width="130" height="60"
+              rx="8"
+              fill="white"
+              stroke="#243b72"
+              stroke-width="2"/>
+
+        <text x="495" y="85"
+              text-anchor="middle"
+              font-size="18">
+            Plant
+        </text>
+
+        <text x="30" y="55"
+              font-size="17">
+            r(t)
+        </text>
+
+        <text x="390" y="55"
+              font-size="17">
+            u(t)
+        </text>
+
+        <text x="620" y="55"
+              font-size="17">
+            y(t)
+        </text>
+
+        <text x="315" y="165"
+              text-anchor="middle"
+              font-size="16">
+            Negative Feedback
+        </text>
+
+    </svg>
+
+</div>
+
+            <p class="diagram-note">
+                The output is fed back to the controller
+                and compared with the setpoint.
+            </p>
+        </section>
+
+        <!-- 6. Response Plot -->
+        <section>
+            <h2>6. Closed-Loop Step Response</h2>
+
+            <p>
+                Compare the desired setpoint
+                with the actual system output.
+            </p>
+
+            <div id="responsePlot"></div>
+        </section>
+
+        <!-- 7. Control Signal -->
+        <section>
+            <h2>7. Control Signal</h2>
+
+            <p>
+                This plot shows the PID control
+                signal and its saturation limits.
+            </p>
+
+            <div id="controlPlot"></div>
+
+            <p id="controlLimitInfo"></p>
+        </section>
+
+        <!-- 8. Performance Metrics -->
+        <section>
+            <h2>8. Performance Metrics</h2>
+
+            <div class="metrics-grid">
+
+                <div class="metric">
+                    <h3>Rise Time</h3>
+                    <p id="riseTime">--</p>
+                </div>
+
+                <div class="metric">
+                    <h3>Overshoot</h3>
+                    <p id="overshoot">--</p>
+                </div>
+
+                <div class="metric">
+                    <h3>Settling Time</h3>
+                    <p id="settlingTime">--</p>
+                </div>
+
+                <div class="metric">
+                    <h3>Steady-State Error</h3>
+                    <p id="steadyStateError">--</p>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- 9. Validation Tests -->
+        <section>
+            <h2>9. Validation Tests</h2>
+
+            <p>
+                These checks verify the PID
+                controller against the expected
+                theoretical results.
+            </p>
+
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Test</th>
+                            <th>Expected</th>
+                            <th>Calculated</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="validationResults">
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>
+            Team Sparky | ENCS4380 | Homework 2
+        </p>
+    </footer>
+
+    <script src="P1.js"></script>
+
+</body>
+</html>
