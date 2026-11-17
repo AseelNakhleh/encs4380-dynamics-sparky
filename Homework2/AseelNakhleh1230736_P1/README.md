@@ -138,6 +138,80 @@ Users predict how increasing Ki affects the steady-state error and compare their
 
 <img src="ScreenShots/Decreases.png" width="650">
 
+## Functional Testing
+
+The PID Playground was tested using different controller parameters to observe changes in system response and performance.
+
+### Test 1: P-Only Controller (Kp = 1)
+
+For a first-order plant with K = 1 and τ = 1 s, the controller uses Kp = 1, Ki = 0, and Kd = 0.
+
+The expected steady-state output is approximately 0.5, with a steady-state error of 0.5.
+
+**Controller Parameters**
+
+<img src="ScreenShots/Kp=1/parameters.png" width="650">
+
+**Closed-Loop Step Response**
+
+<img src="ScreenShots/Kp=1/output.png" width="650">
+
+**Performance Metrics**
+
+<img src="ScreenShots/Kp=1/error.png" width="650">
+
+### Test 2: P-Only Controller (Kp = 9)
+
+For Kp = 9, Ki = 0, and Kd = 0, the system is expected to respond faster.
+
+The expected steady-state output is approximately 0.9, with a steady-state error of 0.1.
+
+**Controller Parameters**
+
+<img src="ScreenShots/Kp=9/parameters.png" width="650">
+
+**Closed-Loop Step Response**
+
+<img src="ScreenShots/Kp=9/output.png" width="650">
+
+**Performance Metrics**
+
+<img src="ScreenShots/Kp=9/error.png" width="650">
+
+### Test 3: PI Controller (Kp = 1, Ki = 1)
+
+For Kp = 1, Ki = 1, and Kd = 0, the integral term eliminates the steady-state error for the stable first-order system.
+
+The expected steady-state output is approximately 1, with a steady-state error approaching zero.
+
+**Controller Parameters**
+
+<img src="ScreenShots/Kp=1,Ki=1/parameter.png" width="650">
+
+**Closed-Loop Step Response**
+
+<img src="ScreenShots/Kp=1,Ki=1/output.png" width="650">
+
+**Performance Metrics**
+
+<img src="ScreenShots/Kp=1,Ki=1/error.png" width="650">
+
+### Test 4: Second-Order System
+
+The second-order plant was tested by changing the natural frequency and damping ratio while observing changes in the system response.
+
+**System Parameters**
+
+<img src="ScreenShots/Second%20order/parameter.png" width="650">
+
+**Closed-Loop Step Response**
+
+<img src="ScreenShots/Second%20order/output.png" width="650">
+
+**Performance Metrics**
+
+<img src="ScreenShots/Second%20order/error.png" width="650">
+
 ## Live Website
 
 The PID Playground is part of the Team Sparky PID Control Toolkit.
@@ -148,4 +222,4 @@ The PID Playground is part of the Team Sparky PID Control Toolkit.
 
 ## AI Assistance
 
-AI tools were used to help understand PID control concepts and clarify theoretical ideas related to the module. The implementation and review of the module were carried out by the developer.
+AI tools were used to help understand PID control concepts and clarify theoretical ideas related to the module also helping the developer with implementing the code. 
