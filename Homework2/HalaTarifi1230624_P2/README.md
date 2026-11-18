@@ -159,4 +159,4 @@ The deployed P2 page returned HTTP 200 and rendered the default response in Chro
 
 ## AI Assistance
 
-OpenAI Codex assisted Hala Tarifi with the HTML, CSS, and JavaScript implementation, the switch from Euler integration to RK4, and the stability readout. Codex also ran the numerical checks and Chrome automation, captured the running webpage for the screenshots, and drafted this README from the source code and verified results.
+AI tools were used to assist with the implementation, debugging, testing, and documentation of the P2 module.
