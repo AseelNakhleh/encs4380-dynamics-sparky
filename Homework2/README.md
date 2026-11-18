@@ -63,3 +63,8 @@ The PID Control Toolkit will be integrated into the existing Team Sparky website
 
 AI tools were used to help us understand PID control concepts and clarify some theoretical ideas related to the modules. The team members were responsible for developing and implementing their assigned modules.
 
+## Screenshots and Validation Tests
+
+Screenshots, validation tests, and test results for each part (P1–P4) are documented in its individual README file.
+
+
