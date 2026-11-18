@@ -1,0 +1,92 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>P2 | A Slow Sensor in the Loop</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <main class="shell">
+    <header>
+      <p class="course">ENCS4380 / PID Control Toolkit</p>
+      <h1>A Slow Sensor in the Loop</h1>
+      <p class="intro">Module P2 explores what happens when a PID controller gets its feedback from a sensor that takes time to catch up.</p>
+    </header>
+
+    <section class="panel" aria-labelledby="exercise-title">
+      <h2 id="exercise-title">Predict, then check</h2>
+      <form id="prediction">
+        <fieldset>
+          <legend>With the PID gains held fixed, what will happen to the true output when the sensor time constant increases from 0.08 s to 2.00 s?</legend>
+          <label><input type="radio" name="prediction" value="less" required> Less overshoot and less oscillation</label>
+          <label><input type="radio" name="prediction" value="same"> About the same response</label>
+          <label><input type="radio" name="prediction" value="more"> More overshoot and more oscillation</label>
+        </fieldset>
+        <button type="submit" aria-controls="comparison" aria-expanded="false">Check prediction</button>
+      </form>
+      <div id="comparison" hidden>
+        <p id="feedback" role="status"></p>
+        <p>A slow sensor reports a value below the rising true output. The measured error stays positive longer, so the controller keeps driving the plant even as the true output approaches or passes the setpoint. Delayed feedback during the correction can produce repeated swings.</p>
+        <p class="muted">Both runs use Kp = 2.00, Ki = 2.00, and Kd = 0.15. The graphs share a vertical scale.</p>
+        <div class="legend" aria-hidden="true"><span class="true">True output</span><span class="sensor">Measured output</span><span class="target">Setpoint</span></div>
+        <div class="comparison-plots">
+          <figure>
+            <figcaption>Fast sensor · τs = 0.08 s <small id="fast-summary"></small></figcaption>
+            <canvas id="fast-plot" role="img" aria-label="Fast sensor step response" aria-describedby="fast-summary"></canvas>
+          </figure>
+          <figure>
+            <figcaption>Slow sensor · τs = 2.00 s <small id="slow-summary"></small></figcaption>
+            <canvas id="slow-plot" role="img" aria-label="Slow sensor step response" aria-describedby="slow-summary"></canvas>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="workspace" aria-label="Interactive simulation">
+      <div class="panel controls">
+        <h2>Loop settings</h2>
+        <div class="slider">
+          <label for="tau">Sensor time constant τs</label><output id="tau-value" for="tau">0.08 s</output>
+          <input id="tau" type="range" min="0.02" max="3" step="0.01" value="0.08">
+        </div>
+        <div class="slider">
+          <label for="kp">Proportional gain Kp</label><output id="kp-value" for="kp">2.00</output>
+          <input id="kp" type="range" min="0" max="8" step="0.05" value="2">
+        </div>
+        <div class="slider">
+          <label for="ki">Integral gain Ki</label><output id="ki-value" for="ki">2.00</output>
+          <input id="ki" type="range" min="0" max="5" step="0.05" value="2">
+        </div>
+        <div class="slider">
+          <label for="kd">Derivative gain Kd</label><output id="kd-value" for="kd">0.15</output>
+          <input id="kd" type="range" min="0" max="2" step="0.05" value="0.15">
+        </div>
+        <button type="button" id="reset" class="secondary">Reset sliders</button>
+        <p class="muted stability-example">To isolate sensor lag, set Kp = 1, Ki = 3, and Kd = 0. Try τs = 0.08 s, 2.00 s, and 3.00 s to compare decaying, sustained, and growing responses.</p>
+      </div>
+      <div class="panel response">
+        <h2>Closed-loop step response</h2>
+        <div class="legend" aria-hidden="true"><span class="true">True output</span><span class="sensor">Measured output</span><span class="target">Setpoint</span></div>
+        <canvas id="live-plot" role="img" aria-label="True output, measured output, and setpoint over time" aria-describedby="live-summary live-stability"></canvas>
+        <p class="summary" id="live-summary"></p>
+        <p class="summary" id="live-stability"></p>
+        <p class="muted">Overshoot and crossings are measured on the true output during the 16 s simulation.</p>
+      </div>
+    </section>
+
+    <section class="panel model" aria-labelledby="model-title">
+      <h2 id="model-title">Model and feedback</h2>
+      <p>The plant uses the assignment’s reference values <strong>K = 1</strong> and <strong>τp = 1 s</strong>. The loop starts at rest and the setpoint steps to 1 at t = 0.</p>
+      <div class="equations">
+        <div><span>Plant</span><code>dy/dt = (u − y) / τp</code></div>
+        <div><span>Sensor</span><code>dym/dt = (y − ym) / τs</code></div>
+        <div><span>PID</span><code>e = r − ym<br>u = Kp·e + Ki·∫e dt + Kd·de/dt</code></div>
+      </div>
+      <p class="muted">Fourth-order Runge–Kutta (RK4) advances the plant, sensor, and error integral together every 0.002 s. For the constant setpoint after the step, de/dt = −dym/dt.</p>
+      <p class="muted">The stability label comes from the continuous-time loop equations. For this plant, the oscillation boundary is Ki = (1 + τs + Kd)(1 + Kp)/τs. At that boundary oscillations persist, and above it they grow in this ideal model with an unconstrained control signal.</p>
+    </section>
+  </main>
+</body>
+</html>
