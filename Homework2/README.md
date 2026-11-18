@@ -20,8 +20,8 @@ The planned folder structure is:
 
 | Module | Browser Entry Point |
 |---|---|
-| P1 | `https://aseelnakhleh.github.io/encs4380-dynamics-sparky/Homework2/AseelNakhleh1230736_P1/P1.html` |
-| P2 | `` |
+| P1 | `(https://aseelnakhleh.github.io/encs4380-dynamics-sparky/Homework2/AseelNakhleh1230736_P1/P1.html)` |
+| P2 | `(https://aseelnakhleh.github.io/encs4380-dynamics-sparky/Homework2/HalaTarifi1230624_P2/index.html)` |
 | P3 | `` |
 | P4 | `` |
 
