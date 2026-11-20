@@ -1,0 +1,18 @@
+PASS sample_4x4: 4x4, race=4 moves, optimal=4
+PASS sample_8x8: 8x8, race=12 moves, optimal=12
+PASS wall_follower_trap_8x8: 8x8, race=8 moves, optimal=8
+PASS changed_goal_10x7: 10x7, race=16 moves, optimal=16
+PASS narrow_1x7: 1x7, race=6 moves, optimal=6
+PASS blocked_move_recovery_3x3: 3x3, race=3 moves, optimal=3
+PASS random_4x4_seed0: 4x4, race=10 moves, optimal=10
+PASS random_4x4_seed1: 4x4, race=6 moves, optimal=6
+PASS random_4x4_seed2: 4x4, race=8 moves, optimal=8
+PASS random_4x4_seed3: 4x4, race=6 moves, optimal=6
+PASS random_8x8_seed3: 8x8, race=16 moves, optimal=16
+PASS random_10x7_seed3: 10x7, race=20 moves, optimal=20
+PASS random_16x16_seed3: 16x16, race=30 moves, optimal=30
+PASS random_1x7_seed3: 1x7, race=5 moves, optimal=5
+PASS random_7x1_seed3: 7x1, race=4 moves, optimal=4
+PASS random_2x2_seed3: 2x2, race=3 moves, optimal=3
+PASS center_block_8x8_3: 8x8, race=8 moves, optimal=8
+ALL 86 OFFICIAL-HAL PROTOCOL TESTS PASSED (no mms GUI used)
