@@ -6,6 +6,8 @@
 #include <stdio.h>   
 #include <string.h>
 
+#define TEAM_ID "T29"
+
 #define MAX_CELLS (MM_MAX_SIZE * MM_MAX_SIZE)
 #define INF UINT16_MAX
 #define MAX_STEPS (MAX_CELLS * 128)
