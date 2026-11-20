@@ -12,17 +12,20 @@ The algorithm was tested successfully using the professor's official MMS simulat
 ## Screenshots
 
 
+
+## Screenshots
+
 ### 1. 8×8 Maze — Successful Run
-![8x8 Maze](screenshots/01_8x8_Solver_Success.png)
+![8x8 Maze](01_8x8_Solver_Success.png)
 
 The robot reached the goal, explored all 64 cells, returned home, and completed the speed run.
 
 ### 2. Failed Wall-Follower
-![Failed Wall-Follower](screenshots/02_Failed_WallFollower.png)
+![Failed Wall-Follower](02_Failed_WallFollower.png)
 
-The professor's wall-following algorithm failed to reach the goal in the custom maze.
+The professor's left-hand wall-following algorithm failed to reach the goal in the custom maze.
 
 ### 3. Wall-Follower Trap — Flood Fill Success
-![Flood Fill Success](screenshots/03_WallFollow_Trap_Solved_By_FloodFill.png)
+![Flood Fill Success](03_WallFollow_Trap_Solved_By_FloodFill.png)
 
-Our Flood Fill algorithm successfully solved the same maze and completed the shortest-path run.
+Our Flood Fill algorithm successfully solved the same maze, returned home, and completed the shortest-path run.
