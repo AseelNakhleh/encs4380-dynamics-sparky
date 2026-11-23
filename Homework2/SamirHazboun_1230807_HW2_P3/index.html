@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>P3 | Digital PID</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+<main>
+  <header>
+    <p class="caption">ENCS4380 · Homework 2 · Control</p>
+    <h1>P3 · Digital PID</h1>
+    <p>Set the sampling period and watch how long the controller holds each PWM command.</p>
+  </header>
+
+  <section class="panel">
+    <h2>Predict, then check</h2>
+    <label for="guess">With the demo gains fixed, what happens when you increase the sampling period from 0.02 s to 1.25 s?</label>
+    <div class="actions">
+      <select id="guess">
+        <option value="">Choose your prediction</option>
+        <option value="smooth">The output becomes smoother</option>
+        <option value="oscillates">The output oscillates more</option>
+        <option value="same">The output stays the same</option>
+      </select>
+      <button id="check" type="button">Check on the plots</button>
+    </div>
+    <p id="feedback" role="status"></p>
+  </section>
+
+  <section class="panel" aria-labelledby="settings-title">
+    <h2 id="settings-title">Controller settings</h2>
+    <div class="actions">
+      <button type="button" id="fast">Fast sampling</button>
+      <button type="button" id="slow">Slow sampling</button>
+      <button type="button" id="windup">Windup demo</button>
+    </div>
+    <div class="sliders">
+      <label>Sample period <i>T</i><sub>s</sub> <output id="sample-value" for="sample"></output> s
+        <input id="sample" type="range" min="0.01" max="1.50" step="0.01" value="0.02">
+      </label>
+      <label>Proportional gain <i>K</i><sub>p</sub> <output id="kp-value" for="kp"></output>
+        <input id="kp" type="range" min="0" max="12" step="0.05" value="2">
+      </label>
+      <label>Integral gain <i>K</i><sub>i</sub> <output id="ki-value" for="ki"></output>
+        <input id="ki" type="range" min="0" max="15" step="0.05" value="2">
+      </label>
+      <label>Derivative gain <i>K</i><sub>d</sub> <output id="kd-value" for="kd"></output>
+        <input id="kd" type="range" min="0" max="1" step="0.01" value="0.10">
+      </label>
+      <label>Target output <output id="target-value" for="target"></output>
+        <input id="target" type="range" min="0.05" max="1.50" step="0.01" value="0.6">
+      </label>
+      <label class="toggle"><input id="anti-windup" type="checkbox" checked> Enable anti-windup</label>
+    </div>
+    <details class="formulas">
+      <summary>First-order plant settings and model</summary>
+      <div class="sliders">
+        <label>Plant gain <i>K</i> <output id="gain-value" for="gain"></output>
+          <input id="gain" type="range" min="0.10" max="3.00" step="0.01" value="1">
+        </label>
+        <label>Time constant <i>τ</i> <output id="tau-value" for="tau"></output> s
+          <input id="tau" type="range" min="0.02" max="5.00" step="0.01" value="1">
+        </label>
+      </div>
+      <p><i>G</i>(s) = <i>K</i>/(<i>τ</i>s + 1). Forward Euler advances the plant using dy/dt = (<i>Ku</i> − y)/<i>τ</i>. The PWM command <i>u</i> stays fixed between samples and ranges from 0 to 1 (0–100%).</p>
+      <p class="caption">The demo uses K = 1 and τ = 1 s. For a motor, express speed as a fraction of your chosen reference speed, then enter the gain in that same scale.</p>
+    </details>
+  </section>
+
+  <section class="panel">
+    <h2>Output and target</h2>
+    <p class="legend"><span class="actual">Current sampling</span> <span class="reference">0.02 s reference</span> <span class="target">Target</span></p>
+    <canvas id="response" class="chart" role="img" aria-label="Simulated output and target over time, compared with 0.02 second sampling"></canvas>
+    <dl class="metrics">
+      <div><dt>Rise time (10–90% of target)</dt><dd id="rise"></dd></div>
+      <div><dt>Peak overshoot</dt><dd id="overshoot"></dd></div>
+      <div><dt>Settling time (±2% of target)</dt><dd id="settling"></dd></div>
+      <div><dt>Absolute error at end</dt><dd id="error"></dd></div>
+    </dl>
+    <p class="caption" id="comparison"></p>
+    <p class="caption" id="limit-note"></p>
+  </section>
+
+  <section class="panel">
+    <h2>Held PWM command</h2>
+    <p class="caption">The command changes at sample instants. Dashed lines show the 0% and 100% limits.</p>
+    <canvas id="command" class="chart" role="img" aria-label="Stair-step PWM command as a percentage over time"></canvas>
+    <p id="integral-note" class="caption"></p>
+  </section>
+
+  <section class="panel">
+    <h2>Arduino loop</h2>
+    <p class="caption">The code uses the current settings. A0 is an example feedback input scaled to 0–1. For a drive motor, replace the input function with encoder speed in the simulation’s output units.</p>
+    <div class="actions">
+      <button id="copy" type="button">Copy Arduino code</button>
+      <span id="copy-status" role="status"></span>
+    </div>
+    <pre class="arduino" tabindex="0"><code id="arduino-code"></code></pre>
+    <details class="formulas">
+      <summary>Digital PID equation and anti-windup</summary>
+      <p>At sample k, e[k] = target − y[k]. The proportional term uses the current error. The integral term adds K<sub>i</sub>T<sub>s</sub>e[k]. The derivative term is K<sub>d</sub>(e[k] − e[k−1])/T<sub>s</sub>. The initial previous error and integral term are zero.</p>
+      <p>With anti-windup enabled, the integral update is skipped when it would push the trial command past a PWM limit in the same direction. An update that helps pull the command back into range is allowed.</p>
+    </details>
+  </section>
+</main>
+</body>
+</html>
