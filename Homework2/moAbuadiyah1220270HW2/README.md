@@ -1,92 +1,52 @@
-# \# P4 – PID Tuning Challenge
 
-# 
+# P4 – PID Tuning Challenge
 
-# \*\*Course:\*\* ENCS4380 – Interfacing Techniques  
+**Course:** ENCS4380 – Interfacing Techniques  
+**Homework:** Homework 2 – PID Control Toolkit  
+**Module:** P4 – Tuning Challenge
 
-# \*\*Homework:\*\* Homework 2 – PID Control Toolkit  
+## Overview
 
-# \*\*Module:\*\* P4 – Tuning Challenge
+An interactive PID tuning challenge where users adjust Kp, Ki, and Kd to control a randomly generated first-order or second-order plant and meet the required performance specifications.
 
-# 
+## Features
 
-# \## Overview
+- Random hidden first-order and second-order plants
+- Adjustable PID gains (Kp, Ki, Kd)
+- Output response and control signal graphs
+- Numerical simulation using Euler integration
+- PASS/FAIL checks for overshoot, settling time, and steady-state error
+- Score out of 100 and new plant challenges
+- Predict, then check activity
+- Reveal hidden plant parameters after tuning
 
-# 
+## Screenshots
 
-# An interactive PID tuning challenge where users adjust Kp, Ki, and Kd to control a randomly generated first-order or second-order plant and meet the required performance specifications.
+### PID Tuning and Performance Results
 
-# 
+![PID Tuning Results](screenshots/p4-tuning-success.png)
 
-# \## Features
+### Simulation Details and Statistics
 
-# 
+![Simulation Details](screenshots/p4-simulation-details.png)
 
-# \- Random hidden first-order and second-order plants
+## Example Results
 
-# \- Adjustable PID gains (Kp, Ki, Kd)
+For the second-order plant, the gains Kp = 2, Ki = 3, and Kd = 0.3 achieved:
 
-# \- Output response and control signal graphs
+| Specification | Result |
+|---|---|
+| Overshoot | 0.00% - PASS |
+| Settling Time | 1.98 s - PASS |
+| Steady-State Error | 0.00% - PASS |
+| Final Score | 100/100 |
 
-# \- Numerical simulation using Euler integration
+## How to Run
 
-# \- PASS/FAIL checks for overshoot, settling time, and steady-state error
+Open `index.html` in a web browser.
 
-# \- Score out of 100 and new plant challenges
+The module runs using HTML, CSS, and JavaScript without a server.
 
-# \- Predict, then check activity
+## AI Assistance
 
-# 
-
-# \## Screenshots
-
-# 
-
-# \### PID Tuning and Performance Results
-
-# 
-
-# !\[Successful PID tuning challenge](screenshots/p4-tuning-success.png)
-
-# 
-
-# \### Simulation Details and Statistics
-
-# 
-
-# !\[Simulation explanation and statistics](screenshots/p4-simulation-details.png)
-
-# 
-
-# \## Example Results
-
-# 
-
-# For the second-order plant, the gains Kp = 2, Ki = 3, and Kd = 0.3 achieved:
-
-# 
-
-# | Specification | Result |
-
-# |---|---|
-
-# | Overshoot | 0.00% — PASS |
-
-# | Settling Time | 1.98 s — PASS |
-
-# | Steady-State Error | 0.00% — PASS |
-
-# | Final Score | 100/100 |
-
-# 
-
-# \## How to Run
-
-# 
-
-# Open `index.html` in a web browser. The module runs using HTML, CSS, and JavaScript without a server.
-
-# 
-
-# \*\*AI Assistance:\*\* AI tools were used to help implement and test the module.
-
+AI tools were used to help implement and test the module.
