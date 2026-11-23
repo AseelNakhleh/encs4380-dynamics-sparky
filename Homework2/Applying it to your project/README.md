@@ -2,25 +2,27 @@
 
 ## 1. Introduction
 
-This section presents the application of the PID control project to the Micromouse drive motor. The main objective was to study the relationship between the PWM input and motor speed using encoder feedback.
+This section presents the application of motor speed control to the Micromouse project. The main objective was to study the relationship between the PWM input and motor speed using encoder feedback.
 
-We used an Arduino Uno, an L293D motor driver, and a DC motor with an encoder. The experiment focused on collecting encoder pulse readings at different PWM values and using them to estimate the motor parameters, K and τ.
+The experiment was performed using an Arduino Uno, an L293D motor driver, and a DC motor with an encoder. Different PWM values were applied, and the encoder readings were collected to estimate the motor parameters, K and τ.
 
 ## 2. Simulation Environment
 
 We used **Tinkercad Circuits** to build and test the motor control circuit.
 
-Tinkercad was selected as a practical simulation environment that allowed us to:
-- Build the Arduino and motor driver connections.
-- Test the motor direction and PWM control.
-- Connect the encoder signals and monitor pulse readings.
-- Repeat tests under controlled conditions.
+Tinkercad was selected because it provides a practical environment for building Arduino circuits and testing electronic components without requiring immediate access to physical hardware.
 
-We tried to follow the same general arrangement and testing procedure expected in the actual hardware experiment.
+It allowed us to:
+- Build and test the Arduino and motor driver connections.
+- Control the motor using PWM signals.
+- Connect the encoder and monitor its pulse readings.
+- Perform repeated tests under different PWM settings.
 
-Although a physical motor setup would provide more realistic measurements, Tinkercad allowed us to implement and investigate the control concept in a virtual environment.
+Our goal was to follow the expected experimental procedure as closely as possible within the available simulation environment.
 
-It is important to note that simulated results may differ from real motor behavior because the simulator does not reproduce every physical effect, such as actual mechanical load, friction, electrical noise, and hardware variations.
+Although physical hardware would provide more realistic measurements, Tinkercad allowed us to implement the control concept and investigate the motor response.
+
+The simulation may not reproduce every physical effect, such as actual mechanical load, friction, electrical noise, and hardware variations.
 
 ## 3. Circuit Configuration
 
@@ -32,7 +34,7 @@ The circuit consists of:
 - External DC power supply.
 - Encoder feedback connections.
 
-The Arduino was configured with the following pins:
+The Arduino pins were configured as follows:
 
 | Function | Arduino Pin |
 |---|---|
@@ -41,7 +43,7 @@ The Arduino was configured with the following pins:
 | Motor Enable | D8 |
 | Encoder Channel A | D2 |
 
-The encoder feedback was used to measure motor rotation through pulse counting.
+The encoder feedback was used to measure motor rotation by counting pulses.
 
 ### Circuit Diagram
 
@@ -49,123 +51,146 @@ The encoder feedback was used to measure motor rotation through pulse counting.
 
 ## 4. Experimental Procedure
 
-The experiment was performed using two different PWM settings.
+Two different PWM settings were tested to investigate the relationship between the input signal and motor speed.
 
 **Test 1: PWM = 100**
 
-The motor was operated with a PWM command of 100, and encoder pulses were recorded over time.
+The motor was operated at a PWM value of 100, and encoder pulses were recorded over time.
 
 **Test 2: PWM = 200**
 
-The PWM command was increased to 200, and the encoder readings were collected again.
+The PWM value was increased to 200, and another set of encoder measurements was collected.
 
-The results were monitored using the Arduino Serial Monitor.
-
-The objective was to compare the motor speed at the two input levels and observe how the encoder measurements changed.
+The Arduino Serial Monitor was used to record the measurements in pulses per second.
 
 ## 5. Experimental Results
 
-### Test 1 – PWM = 100
+### 5.1 Test 1 – PWM = 100
 
 The recorded measurements showed an average speed of approximately 48.23 pulses per second.
 
 ![PWM 100 Results](100.png)
 
-### Test 2 – PWM = 200
+### 5.2 Test 2 – PWM = 200
 
-After increasing the PWM command to 200, the average measured speed increased to approximately 149.24 pulses per second.
+After increasing the PWM command to 200, the average measured speed increased to approximately 148.86 pulses per second.
 
 ![PWM 200 Results](200.png)
 
-### Results Comparison
+### 5.3 Results Comparison
 
 | Parameter | PWM = 100 | PWM = 200 |
 |---|---:|---:|
-| Average Speed (pulses/s) | 48.23 | 149.24 |
-| Minimum Recorded Speed | 36 | 130 |
-| Maximum Recorded Speed | 62 | 160 |
+| Average Speed (pulses/s) | 48.23 | 148.86 |
+| Minimum Speed (pulses/s) | 36 | 130 |
+| Maximum Speed (pulses/s) | 62 | 160 |
 
-The measurements show an increase in the average encoder pulse rate when the PWM command was increased.
+The measurements indicate that the average encoder pulse rate increased when the PWM command was increased.
 
-Some fluctuations were observed during both tests.
+Some variations were observed between consecutive measurements.
 
 ## 6. Estimation of Motor Parameters
 
-The experimental measurements were used to estimate the parameters of a first-order motor model:
+The experimental measurements were used to estimate the parameters of a first-order motor model.
 
-\[
-G(s)=\frac{K}{\tau s+1}
-\]
+The general transfer function is:
+
+```text
+G(s) = K / (τs + 1)
+```
+
+Where:
+- K is the process gain.
+- τ is the time constant.
+- s is the Laplace variable.
 
 ### 6.1 Process Gain (K)
 
 The process gain represents the change in motor speed relative to the change in PWM input.
 
-\[
-K=\frac{\Delta Speed}{\Delta PWM}
-\]
+The calculation is:
+
+```text
+K = Change in Speed / Change in PWM
+```
 
 Using the average measured speeds:
 
-\[
-K=\frac{149.24-48.23}{200-100}
-\]
+```text
+K = (148.86 - 48.23) / (200 - 100)
 
-\[
-\boxed{K\approx1.01}
-\]
+K = 100.63 / 100
 
-Therefore, the estimated process gain is approximately 1.01 pulses/s per PWM unit.
+K ≈ 1.01
+```
+
+Therefore, the estimated process gain is:
+
+**K ≈ 1.01 pulses/s per PWM unit.**
 
 ### 6.2 Time Constant (τ)
 
 The time constant describes how quickly the motor response approaches its final value after a change in the input.
 
-For a first-order system, the time constant corresponds to the time required to reach approximately 63.2% of the total response change.
+For a first-order system, the time constant is the time required to reach approximately 63.2% of the total response change.
 
-Based on the available transient measurements, an approximate value was considered:
+The approximate calculation uses:
 
-\[
-\boxed{\tau\approx0.10\text{ s}}
-\]
+```text
+y(τ) = Initial Speed + 0.632 ×
+       (Final Speed - Initial Speed)
+```
 
-This value is preliminary because some initial encoder readings during the transition differed considerably from the steady-state measurements.
+Based on the available transient measurements, the response showed a rapid change during the first sampling intervals after the PWM step.
 
-The difference may be related to pulse-counting behavior, sampling timing, or the limitations of the simulated motor and encoder model.
+An approximate time constant was considered:
 
-Therefore, additional testing would be required to obtain a more consistent time-constant measurement.
+```text
+τ ≈ 0.10 seconds
+```
 
-### 6.3 Preliminary Plant Model
+This value is preliminary because the initial transient readings showed variations compared with the steady-state measurements. The sampling process and limitations of the simulation environment may have affected the observed response.
+
+Further testing with physical hardware or additional simulation measurements would help improve this estimate.
+
+### 6.3 Preliminary Motor Model
 
 Using the estimated parameters:
 
-\[
-\boxed{G(s)=\frac{1.01}{0.10s+1}}
-\]
+```text
+K = 1.01
+τ = 0.10 s
+```
 
-This model provides an initial approximation of the motor behavior based on the collected simulation results.
+The preliminary first-order model is:
+
+```text
+G(s) = 1.01 / (0.10s + 1)
+```
+
+This model provides an initial approximation based on the available simulation measurements.
 
 ## 7. Challenges and Limitations
 
-During the experiment, we faced several challenges:
+During the experiment, we encountered several challenges:
 
-- The encoder readings showed fluctuations between consecutive measurements.
-- Some initial readings during the PWM transition differed from the steady-state measurements.
-- The simulated response did not always follow the expected smooth first-order behavior.
-- The Tinkercad environment provides an approximation of the motor and encoder behavior rather than measurements from a physical motor.
+- Encoder readings showed variations between consecutive measurements.
+- Some initial transient readings differed from the steady-state measurements.
+- The simulated motor response did not always follow a perfectly smooth first-order behavior.
+- Tinkercad provides an approximation of the motor and encoder behavior rather than measurements from physical hardware.
 
-Despite these limitations, we were able to establish the circuit, test different PWM commands, collect encoder measurements, and obtain preliminary estimates of the motor parameters.
+Despite these challenges, we were able to build the circuit, test different PWM values, collect encoder measurements, and obtain preliminary estimates of the motor parameters.
 
-Further testing with physical hardware would help validate the estimated model and improve the accuracy of the measurements.
+The experience also helped us understand the importance of encoder feedback, sampling time, and measurement consistency when modeling a motor system.
 
 ## 8. Conclusion
 
-In this experiment, we implemented a simulated Micromouse motor control setup using Arduino Uno, an L293D motor driver, and an encoder-equipped DC motor.
+In this experiment, we implemented a simulated Micromouse motor control setup using an Arduino Uno, an L293D motor driver, and a DC motor with an encoder.
 
 We tested two PWM levels and observed an increase in the average encoder pulse rate when the PWM command increased from 100 to 200.
 
-Using the collected measurements, we estimated the process gain and obtained a preliminary time-constant estimate.
+The collected measurements were used to estimate the process gain and obtain a preliminary time-constant value.
 
-Although some measurement variations were observed, the experiment provided an opportunity to apply motor speed measurement, encoder feedback, and first-order system modeling.
+Although some measurement variations were observed, the experiment provided practical experience in motor speed measurement, encoder feedback, PWM control, and first-order system modeling.
 
-These preliminary results provide a starting point for the PID controller design in the next stage.
+These estimated parameters provide a starting point for the PID controller design in the next stage of the project.
