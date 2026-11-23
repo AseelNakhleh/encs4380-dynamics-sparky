@@ -22,7 +22,7 @@ The planned folder structure is:
 |---|---|
 | P1 | [Open P1](https://aseelnakhleh.github.io/encs4380-dynamics-sparky/Homework2/AseelNakhleh1230736_P1/P1.html) |
 | P2 | [Open P2](https://aseelnakhleh.github.io/encs4380-dynamics-sparky/Homework2/HalaTarifi1230624_P2/index.html) |
-| P3 | [Open P3](https://aseelnakhleh.github.io/encs4380-dynamics-sparky/Homework2/SamirHazboun1230807_P3/index.html) |
+| P3 | [Open P3](https://aseelnakhleh.github.io/encs4380-dynamics-sparky/Homework2/SamirHazboun_1230807_HW2_P3/index.html) |
 | P4 | [Open P4](https://aseelnakhleh.github.io/encs4380-dynamics-sparky/Homework2/moAbuadiyah1220270HW2/index.html) |
 
 
