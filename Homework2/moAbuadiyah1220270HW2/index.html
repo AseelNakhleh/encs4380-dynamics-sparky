@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b1120">
+  <meta name="description" content="ENCS4380 Homework 2 P4: a live PID tuning challenge with hidden random plants, numerical simulation, and pass/fail scoring.">
+  <title>P4 — PID Tuning Challenge | ENCS4380</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#top" aria-label="P4 PID tuning challenge homepage">
+      <span class="brand-mark" aria-hidden="true">∿</span>
+      <span><strong>ENCS4380</strong><small>CONTROL TOOLKIT / HOMEWORK 2</small></span>
+    </a>
+    <span class="pill">MODULE P4 <span class="pill-dot">•</span> INTERACTIVE</span>
+  </header>
+
+  <main id="top" class="page">
+    <section class="hero">
+      <div>
+        <p class="eyebrow"><span class="eyebrow-line"></span> THE FEEDBACK LAB / 04</p>
+        <h1>Tune the <span>unknown.</span></h1>
+        <p class="lead">A hidden plant. Three PID gains. One performance specification. Adjust the controller, predict the response, then test it in a numerical simulation.</p>
+      </div>
+      <div class="hero-meta">
+        <div><span>MODEL TYPE</span><strong id="plant-type">Generating…</strong></div>
+        <div><span>CHALLENGE</span><strong id="challenge-number">01</strong></div>
+        <div><span>ROUND BEST</span><strong><span id="round-best">0</span><em> / 100</em></strong></div>
+      </div>
+    </section>
+
+    <div class="workspace">
+      <div class="main-col">
+        <section class="panel challenge-panel" aria-labelledby="challenge-title">
+          <div class="panel-heading">
+            <div><p class="overline">01 / MISSION BRIEF</p><h2 id="challenge-title">Your target specification</h2></div>
+            <button class="btn btn-ghost" id="new-plant" type="button" title="Generate a new random hidden plant">↻ New plant</button>
+          </div>
+          <div class="spec-grid" role="group" aria-label="Required performance specifications">
+            <div class="spec-item"><span>MAXIMUM OVERSHOOT</span><strong>≤ 10<em>%</em></strong><small>Peak above target</small></div>
+            <div class="spec-item"><span>SETTLING TIME</span><strong>≤ <span id="settling-limit">—</span><em> s</em></strong><small>Inside a ±2% band</small></div>
+            <div class="spec-item"><span>STEADY-STATE ERROR</span><strong>≤ 1<em>%</em></strong><small>Practical zero, final 2 s</small></div>
+          </div>
+          <p class="description"><strong>Hidden plant:</strong> The plant type is visible, but its physical parameters stay hidden during tuning. A unit-step target of <strong>1.0</strong> is applied at <strong>t = 0 s</strong>. The controller output is constrained to <strong>−4 to +4</strong> normalized units.</p>
+        </section>
+
+        <section class="panel chart-panel" aria-labelledby="response-title">
+          <div class="panel-heading small-heading">
+            <div><p class="overline">02 / CLOSED-LOOP RESPONSE</p><h2 id="response-title">Output versus setpoint</h2></div>
+            <span id="plot-state" class="mini-tag">AWAITING TEST</span>
+          </div>
+          <div class="legend"><span><i class="swatch output"></i>Plant output y(t)</span><span><i class="swatch target"></i>Setpoint r(t)</span><span><i class="swatch band"></i>±2% band</span></div>
+          <div class="plot-wrap"><svg id="response-plot" role="img" aria-label="Closed-loop plant output versus time and setpoint"></svg><p class="plot-empty" id="response-empty">Choose your gains and click <strong>Run PID test</strong> to see the response.</p></div>
+        </section>
+
+        <section class="panel chart-panel control-panel" aria-labelledby="control-title">
+          <div class="panel-heading small-heading"><div><p class="overline">03 / CONTROL EFFORT</p><h2 id="control-title">Control signal u(t)</h2></div><span class="mini-tag">SATURATION ±4.0</span></div>
+          <div class="legend"><span><i class="swatch command"></i>PID command</span><span><i class="swatch limits"></i>Command limits</span></div>
+          <div class="plot-wrap control-wrap"><svg id="control-plot" role="img" aria-label="PID control command versus time with saturation limits"></svg><p class="plot-empty" id="control-empty">The control effort will appear after your test.</p></div>
+        </section>
+      </div>
+
+      <aside class="side-col">
+        <section class="panel tuner-panel" aria-labelledby="tuning-title">
+          <div class="panel-heading small-heading"><div><p class="overline">CONTROLLER</p><h2 id="tuning-title">Adjust the gains</h2></div><span class="mini-tag">PID</span></div>
+          <p class="sidebar-intro">P reacts to error. I removes lasting offset. D resists sudden changes.</p>
+          <div class="gain-block" data-gain-block="kp">
+            <div class="gain-heading"><label for="kp-num"><strong>K<sub>p</sub></strong><span>Proportional</span></label><input id="kp-num" data-gain="kp" type="number" min="0" max="10" step="0.1" value="2" aria-label="Proportional gain Kp"></div>
+            <input id="kp-slider" class="gain-slider kp-color" data-gain="kp" type="range" min="0" max="10" step="0.1" value="2" aria-label="Proportional gain slider"><div class="range-labels"><span>0</span><span>10</span></div>
+          </div>
+          <div class="gain-block" data-gain-block="ki">
+            <div class="gain-heading"><label for="ki-num"><strong>K<sub>i</sub></strong><span>Integral</span></label><input id="ki-num" data-gain="ki" type="number" min="0" max="8" step="0.1" value="0" aria-label="Integral gain Ki"></div>
+            <input id="ki-slider" class="gain-slider ki-color" data-gain="ki" type="range" min="0" max="8" step="0.1" value="0" aria-label="Integral gain slider"><div class="range-labels"><span>0</span><span>8</span></div>
+          </div>
+          <div class="gain-block" data-gain-block="kd">
+            <div class="gain-heading"><label for="kd-num"><strong>K<sub>d</sub></strong><span>Derivative</span></label><input id="kd-num" data-gain="kd" type="number" min="0" max="6" step="0.1" value="0" aria-label="Derivative gain Kd"></div>
+            <input id="kd-slider" class="gain-slider kd-color" data-gain="kd" type="range" min="0" max="6" step="0.1" value="0" aria-label="Derivative gain slider"><div class="range-labels"><span>0</span><span>6</span></div>
+          </div>
+          <div class="presets"><span>QUICK START</span><div><button type="button" class="preset" data-preset="p">P only</button><button type="button" class="preset" data-preset="pi">PI</button><button type="button" class="preset" data-preset="pid">PID</button></div></div>
+          <div class="predict-area"><label for="prediction">PREDICT, THEN CHECK</label><select id="prediction"><option value="" selected>Choose your prediction…</option><option value="pass">All three specs will pass</option><option value="overshoot">There will be too much overshoot</option><option value="slow">It will settle too slowly</option><option value="error">Steady-state error will remain</option></select><p id="prediction-feedback" class="prediction-feedback" aria-live="polite">What do you expect to happen before running the simulation?</p></div>
+          <button type="button" class="btn btn-primary" id="run-test">▶ Run PID test <span>→</span></button>
+          <div class="tuner-footer"><button type="button" id="hint-btn" class="link-button">⊕ Show tuning hint</button><p id="hint-text" class="hint-text" hidden><strong>Try this sequence:</strong> Start with P, introduce I until the offset disappears, then increase D to reduce overshoot. Increasing gains too far can cause oscillations or saturation.</p></div>
+        </section>
+
+        <section class="panel results-panel" aria-labelledby="results-title">
+          <div class="panel-heading small-heading"><div><p class="overline">PERFORMANCE REPORT</p><h2 id="results-title">Specification check</h2></div><span class="mini-tag" id="attempt-number">0 ATTEMPTS</span></div>
+          <div class="criteria-list">
+            <div class="criteria-row"><div><strong>Overshoot</strong><small id="overshoot-measured">Not measured</small></div><span id="overshoot-status" class="status status-idle">—</span></div>
+            <div class="criteria-row"><div><strong>Settling time</strong><small id="settling-measured">Not measured</small></div><span id="settling-status" class="status status-idle">—</span></div>
+            <div class="criteria-row"><div><strong>Steady-state error</strong><small id="error-measured">Not measured</small></div><span id="error-status" class="status status-idle">—</span></div>
+          </div>
+          <div class="score-card"><div><span>ATTEMPT SCORE</span><strong><span id="attempt-score">0</span><small> / 100</small></strong></div><div class="score-bar"><span id="score-fill"></span></div><p id="score-message">Each passed requirement earns points: overshoot 30, settling 40, steady-state error 30.</p></div>
+          <p id="summary-status" class="summary-status" aria-live="polite">Tune the controller and run a test to begin.</p>
+          <button type="button" class="btn btn-reveal" id="reveal-plant" disabled>Reveal hidden parameters</button>
+          <div class="reveal-box" id="reveal-box" hidden></div>
+        </section>
+      </aside>
+    </div>
+
+    <section class="bottom-grid">
+      <div class="panel knowledge-panel"><p class="overline">HOW THE SIMULATION WORKS</p><h2>Inside the feedback loop</h2><p>The error is <strong>e = r − y</strong>. A PID controller calculates its output from proportional, accumulated-error, and derivative terms. The page steps the plant in time with <strong>Euler integration (Δt = 0.004 s)</strong>, measures the response, and tests the stated limits.</p><div class="equation">u = K<sub>p</sub>e + K<sub>i</sub>∫e dt − K<sub>d</sub>d(y)/dt</div><p class="footnote">Derivative-on-measurement uses a small filter to avoid setpoint derivative kick; conditional integration prevents actuator windup. “Zero error” is implemented as ≤1% maximum tracking error over the final 2 seconds because finite-time numerical simulations cannot prove exact zero asymptotically.</p></div>
+      <div class="panel knowledge-panel"><p class="overline">SESSION STATS</p><h2>Keep experimenting</h2><div class="session-stats"><div><strong id="session-tested">0</strong><span>Plants attempted</span></div><div><strong id="session-solved">0</strong><span>Plants solved</span></div><div><strong id="session-tests">0</strong><span>Total PID tests</span></div></div><p class="footnote">Plant parameters follow Homework 1 Module 4: first-order K and τ, or second-order damping ratio ζ and natural frequency ω<sub>n</sub>. All randomized plant parameters remain concealed until revealed.</p></div>
+    </section>
+  </main>
+  <footer>ENCS4380 · Interfacing Techniques · Homework 2 · Module P4 <span>Browser-only simulation • No backend</span></footer>
+</body>
+</html>
